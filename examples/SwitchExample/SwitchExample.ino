@@ -1,5 +1,5 @@
 #include "Arduino.h"
-#include "avdweb_Switch.h" 
+#include "avdweb_uSwitch.h" 
 
 const byte pushButtonpin = 10; // downButton 
 const byte toggleSwitchpin = 9; // upButton

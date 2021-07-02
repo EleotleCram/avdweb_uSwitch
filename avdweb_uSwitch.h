@@ -10,8 +10,7 @@ AUTHOR: Albert van Dalen
 WEBSITE: http://www.avdweb.nl/arduino/hardware-interfacing/simple-switch-debouncer.html
 */
 
-#ifndef AVDWEB_SWITCH_H
-#define AVDWEB_SWITCH_H
+#pragma once
 
 typedef void (*switchCallback_t)(void*); 
 
@@ -68,4 +67,3 @@ public:
   void* _singleClickCallbackParam = nullptr;
   static void* _beepAllCallbackParam = nullptr; // can be used by all objects
 };
-#endif

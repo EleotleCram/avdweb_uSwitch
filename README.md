@@ -130,7 +130,7 @@ For Arduino see here how to use an ISR for polling the buttons:
 
 ```C++
 #include <Arduino.h>
-#include "avdweb_Switch.h"
+#include "avdweb_uSwitch.h"
 #include <FrequencyTimer2.h>
 
 Switch speedUpBtn(1);

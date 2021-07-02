@@ -14,7 +14,7 @@ HISTORY:
 1.0.1    22-05-2013 Added longPress, doubleClick
 1.0.2    01-12-2015 added process(input)
 1.0.3    15-01-2016 added deglitching
-1.0.5    25-01-2017 file renamed to avdweb_Switch
+1.0.5    25-01-2017 file renamed to avdweb_uSwitch
 1.1.0    28-07-2018 added callbacks (code by Sean Lanigan, added by Martin Laclaustra)
 1.2.0-rc 28-07-2018 added singleclick. Reorganize, keeping variables for each event in one function
 1.2.0    29-09-2018 released
@@ -110,7 +110,7 @@ HISTORY:
 */
 
 #include "Arduino.h"
-#include "avdweb_Switch.h"
+#include "avdweb_uSwitch.h"
 
 switchCallback_t Switch::_beepAllCallback; // definition static function pointer with typedef
 //void (*Switch::_beepAllCallback)(void*); // definition static function pointer without typedef
