@@ -12,6 +12,8 @@ WEBSITE: http://www.avdweb.nl/arduino/hardware-interfacing/simple-switch-debounc
 
 #pragma once
 
+#include <Arduino.h>
+
 typedef void (*switchCallback_t)(void*); 
 
 class Switch
