@@ -62,8 +62,9 @@ public:
 
   unsigned long deglitchTime, switchedTime, pushedTime, releasedTime, ms;
   const byte pin;
-  const bool polarity;
-  bool input, lastInput, equal, deglitched, debounced, _switched, _longPress, longPressDisable, _doubleClick, _singleClick, singleClickDisable;
+  const bool polarity : 1;
+  bool input : 1, lastInput : 1, equal : 1, deglitched : 1, debounced : 1, _switched : 1, _longPress : 1,
+       longPressDisable : 1, _doubleClick : 1, _singleClick : 1, singleClickDisable : 1;
 
   // Event callbacks
   switchCallback_t _pushedCallback = nullptr;
