@@ -40,10 +40,25 @@ typedef enum {
 
 typedef void (*switchCallbackFunc_t)(switchCallback_t type);
 
+#ifndef SWITCH_DEBOUNCE_PERIOD
+#define SWITCH_DEBOUNCE_PERIOD 50
+#endif
+
+#ifndef SWITCH_LONG_PRESS_PERIOD
+#define SWITCH_LONG_PRESS_PERIOD 300
+#endif
+
+#ifndef SWITCH_DOUBLE_CLICK_PERIOD
+#define SWITCH_DOUBLE_CLICK_PERIOD 250
+#endif
+
+#ifndef SWITCH_DEGLITCH_PERIOD
+#define SWITCH_DEGLITCH_PERIOD 10
+#endif
+
 class Switch {
 public:
-  Switch(byte _pin, byte PinMode = INPUT_PULLUP, bool polarity = LOW, int debouncePeriod = 50,
-         int longPressPeriod = 300, int doubleClickPeriod = 250, int deglitchPeriod = 10);
+  Switch(byte _pin, byte PinMode = INPUT_PULLUP, bool polarity = LOW);
   bool poll();     // Returns 1 if switched
   bool switched(); // will be refreshed by poll()
   bool on();
@@ -55,8 +70,6 @@ public:
 
   // Set methods for event callbacks
   void setCallback(switchCallbackFunc_t cb);
-
-  int deglitchPeriod, debouncePeriod, longPressPeriod, doubleClickPeriod;
 
 protected:
   bool process(); // not inline, used in child class
