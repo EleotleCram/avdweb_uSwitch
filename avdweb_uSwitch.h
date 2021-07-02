@@ -72,15 +72,15 @@ public:
   void setCallback(switchCallbackFunc_t cb);
 
 protected:
-  bool process(); // not inline, used in child class
-  void inline deglitch();
-  void inline debounce();
-  void inline calcLongPress();
-  void inline calcDoubleClick();
-  void inline calcSingleClick();
+  bool process(uint32_t ms); // not inline, used in child class
+  void inline deglitch(uint32_t ms);
+  void inline debounce(uint32_t ms);
+  void inline calcLongPress(uint32_t ms);
+  void inline calcDoubleClick(uint32_t ms);
+  void inline calcSingleClick(uint32_t ms);
   void triggerCallbacks();
 
-  unsigned long deglitchTime, switchedTime, pushedTime, releasedTime, ms;
+  unsigned long deglitchTime, switchedTime, pushedTime, releasedTime;
   const byte pin;
   const bool polarity : 1;
   bool input : 1, lastInput : 1, equal : 1, deglitched : 1, debounced : 1, _switched : 1,

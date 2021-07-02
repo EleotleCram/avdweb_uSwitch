@@ -137,16 +137,16 @@ Switch::Switch(byte _pin, byte PinMode, bool polarity) : pin(_pin), polarity(pol
 
 bool Switch::poll() {
   input = digitalRead(pin);
-  ms = millis();
-  return process();
+  uint32_t ms = millis();
+  return process(ms);
 }
 
-bool Switch::process() {
-  deglitch();
-  debounce();
-  calcSingleClick();
-  calcDoubleClick();
-  calcLongPress();
+bool Switch::process(uint32_t ms) {
+  deglitch(ms);
+  debounce(ms);
+  calcSingleClick(ms);
+  calcDoubleClick(ms);
+  calcLongPress(ms);
   if (switched()) {
     switchedTime = ms; // stores last times for future rounds
     if (pushed()) {
@@ -161,7 +161,7 @@ bool Switch::process() {
   return _switched;
 }
 
-void inline Switch::deglitch() {
+void inline Switch::deglitch(uint32_t ms) {
   if (input == lastInput)
     equal = 1;
   else {
@@ -176,7 +176,7 @@ void inline Switch::deglitch() {
   lastInput = input;
 }
 
-void inline Switch::debounce() {
+void inline Switch::debounce(uint32_t ms) {
   _switched = 0;
   if ((deglitched != debounced) && ((ms - switchedTime) > SWITCH_DEBOUNCE_PERIOD)) {
     debounced = deglitched;
@@ -184,7 +184,7 @@ void inline Switch::debounce() {
   }
 }
 
-void inline Switch::calcSingleClick() {
+void inline Switch::calcSingleClick(uint32_t ms) {
   _singleClick = false;
   if (pushed()) {
     if ((ms - pushedTime) >= SWITCH_DOUBLE_CLICK_PERIOD) {
@@ -201,11 +201,11 @@ void inline Switch::calcSingleClick() {
   }
 }
 
-void inline Switch::calcDoubleClick() {
+void inline Switch::calcDoubleClick(uint32_t ms) {
   _doubleClick = pushed() && ((ms - pushedTime) < SWITCH_DOUBLE_CLICK_PERIOD);
 }
 
-void inline Switch::calcLongPress() {
+void inline Switch::calcLongPress(uint32_t ms) {
   _longPress = false;
   if (released())
     longPressDisable = false; // resets when released
