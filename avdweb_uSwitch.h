@@ -29,7 +29,16 @@ WEBSITE: http://www.avdweb.nl/arduino/hardware-interfacing/simple-switch-debounc
 
 #include <Arduino.h>
 
-typedef void (*switchCallback_t)();
+typedef enum {
+  PUSHED = 1,
+  RELEASED,
+  LONG_PRESS,
+  DOUBLE_CLICK,
+  SINGLE_CLICK,
+  BEEP_ALL, // What is this supposed to do?
+} switchCallback_t;
+
+typedef void (*switchCallbackFunc_t)(switchCallback_t type);
 
 class Switch {
 public:
@@ -45,12 +54,7 @@ public:
   bool singleClick(); // will be refreshed by poll()
 
   // Set methods for event callbacks
-  void setPushedCallback(switchCallback_t cb, void *param = nullptr);
-  void setReleasedCallback(switchCallback_t cb, void *param = nullptr);
-  void setLongPressCallback(switchCallback_t cb, void *param = nullptr);
-  void setDoubleClickCallback(switchCallback_t cb, void *param = nullptr);
-  void setSingleClickCallback(switchCallback_t cb, void *param = nullptr);
-  void setBeepAllCallback(switchCallback_t cb, void *param = nullptr);
+  void setCallback(switchCallbackFunc_t cb);
 
   int deglitchPeriod, debouncePeriod, longPressPeriod, doubleClickPeriod;
 
@@ -70,12 +74,5 @@ protected:
       _longPress : 1, longPressDisable : 1, _doubleClick : 1, _singleClick : 1, singleClickDisable : 1;
 
   // Event callbacks
-  switchCallback_t _pushedCallback = nullptr;
-  switchCallback_t _releasedCallback = nullptr;
-  switchCallback_t _longPressCallback = nullptr;
-  switchCallback_t _doubleClickCallback = nullptr;
-  switchCallback_t _singleClickCallback = nullptr;
-  static switchCallback_t _beepAllCallback =
-      nullptr; // static function pointer, can be used by all objects
-  // static void(*_beepAllCallback)(void*) = nullptr; // static function pointer without typedef
+  switchCallbackFunc_t _callback = nullptr;
 };
