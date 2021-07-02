@@ -126,7 +126,6 @@ HISTORY:
 
 switchCallback_t Switch::_beepAllCallback; // definition static function pointer with typedef
 //void (*Switch::_beepAllCallback)(void*); // definition static function pointer without typedef
-void* Switch::_beepAllCallbackParam; // without = 
 
 Switch::Switch(byte _pin, byte PinMode, bool polarity, int debouncePeriod, int longPressPeriod, int doubleClickPeriod, int deglitchPeriod):
 pin(_pin), polarity(polarity), deglitchPeriod(deglitchPeriod), debouncePeriod(debouncePeriod), longPressPeriod(longPressPeriod), doubleClickPeriod(doubleClickPeriod)
@@ -152,7 +151,7 @@ bool Switch::process()
   if(switched())
   { switchedTime = ms; //stores last times for future rounds
     if(pushed())
-    { if(_beepAllCallback) _beepAllCallback(_beepAllCallbackParam);
+    { if(_beepAllCallback) _beepAllCallback();
       pushedTime = ms;
     } else { releasedTime = ms;
     }
@@ -239,52 +238,46 @@ bool Switch::singleClick()
 
 void Switch::triggerCallbacks()
 { if(_pushedCallback && pushed())
-  { _pushedCallback(_pushedCallbackParam);
+  { _pushedCallback();
   }
     else if(_releasedCallback && released())
-  { _releasedCallback(_releasedCallbackParam);
+  { _releasedCallback();
   }
 
   if(_longPressCallback && longPress())
-  { _longPressCallback(_longPressCallbackParam);
+  { _longPressCallback();
   }
 
   if(_doubleClickCallback && doubleClick())
-  { _doubleClickCallback(_doubleClickCallbackParam);
+  { _doubleClickCallback();
   }
 
   if(_singleClickCallback && singleClick())
-  { _singleClickCallback(_singleClickCallbackParam);
+  { _singleClickCallback();
   }
 }
 
 void Switch::setPushedCallback(switchCallback_t cb, void* param)
 { _pushedCallback = cb; // Store the "pushed" callback function
-  _pushedCallbackParam = param;
 }
 
 void Switch::setReleasedCallback(switchCallback_t cb, void* param)
 { _releasedCallback = cb; // Store the "released" callback function
-  _releasedCallbackParam = param;
 }
 
 void Switch::setLongPressCallback(switchCallback_t cb, void* param)
 { _longPressCallback = cb; // Store the "long press" callback function
-  _longPressCallbackParam = param;
 }
 
 void Switch::setDoubleClickCallback(switchCallback_t cb, void* param)
 { _doubleClickCallback = cb; // Store the "double click" callback function
-  _doubleClickCallbackParam = param;
 }
 
 void Switch::setSingleClickCallback(switchCallback_t cb, void* param)
 { _singleClickCallback = cb; // Store the "double click" callback function
-  _singleClickCallbackParam = param;
 }
 
 //void Switch::setBeepAllCallback(void(*cb)(void*), void* param) static function pointer without typedef
 void Switch::setBeepAllCallback(switchCallback_t cb, void* param) // with static function pointer without typedef
 { _beepAllCallback = cb; // Store the "beep" callback function
-  _beepAllCallbackParam = param;
-} 
+}
