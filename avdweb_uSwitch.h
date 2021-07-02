@@ -1,4 +1,16 @@
 /*
+ * avdweb_uSwitch.h
+ * Copyright (C) 2012  Albert van Dalen http://www.avdweb.nl (Original code)
+ * Copyright (C) 2021  Marcel Toele ("Diet" modifications)
+ *
+ * This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+ * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License at http://www.gnu.org/licenses .
+ */
+
+// Original file header:
+/*
 Switch.cpp
 Copyright (C) 2012  Albert van Dalen http://www.avdweb.nl
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License
