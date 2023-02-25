@@ -49,7 +49,7 @@ typedef void (*switchCallbackFunc_t)(switchCallback_t type);
 #endif
 
 #ifndef SWITCH_DOUBLE_CLICK_PERIOD
-#define SWITCH_DOUBLE_CLICK_PERIOD 250
+#define SWITCH_DOUBLE_CLICK_PERIOD 500
 #endif
 
 #ifndef SWITCH_DEGLITCH_PERIOD
