@@ -45,7 +45,7 @@ typedef void (*switchCallbackFunc_t)(switchCallback_t type);
 #endif
 
 #ifndef SWITCH_LONG_PRESS_PERIOD
-#define SWITCH_LONG_PRESS_PERIOD 300
+#define SWITCH_LONG_PRESS_PERIOD 1000
 #endif
 
 #ifndef SWITCH_DOUBLE_CLICK_PERIOD
